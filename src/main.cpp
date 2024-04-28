@@ -64,6 +64,7 @@ bool sendTelemetry(unsigned int totalSeen, unsigned int totalFpSeen, unsigned in
             && SensirionSGP30::SendDiscovery()
             && HX711::SendDiscovery()
             && DS18B20::SendDiscovery()
+            && AnalogRead::SendDiscovery()
 #endif
         ) {
             sentDiscovery = true;
@@ -566,6 +567,7 @@ void setup() {
     SensirionSGP30::Setup();
     HX711::Setup();
     DS18B20::Setup();
+    AnalogRead::Setup();
 #endif
     xTaskCreatePinnedToCore(scanTask, "scanTask", SCAN_TASK_STACK_SIZE, nullptr, 1, &scanTaskHandle, CONFIG_BT_NIMBLE_PINNED_TO_CORE);
     reportSetup();
@@ -603,5 +605,6 @@ void loop() {
     SensirionSGP30::Loop();
     HX711::Loop();
     DS18B20::Loop();
+    AnalogRead::Loop();
 #endif
 }
